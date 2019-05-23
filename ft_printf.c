@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 16:32:42 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/05/23 16:45:26 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/05/23 16:54:36 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,5 +186,4 @@ int main()
 	k = printf("Ceci est un hexadecimal %s\n", "lol");
 	printf("My equal to %i\n", i);
 	printf("Official equal to %i\n", k);
-	
 }
