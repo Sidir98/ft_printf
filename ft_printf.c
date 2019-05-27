@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 16:32:42 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/05/23 16:54:36 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/05/27 16:51:49 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,11 @@ int s(char *str)
 	return (i);
 }
 
+int p (void *ptr)
+{
+	return(s(ft_itoa((int)ptr)));
+}
+
 /*t_f *ft_newt_f(char c, fptr f)
 {
 	t_f *newf;
@@ -129,6 +134,7 @@ t_list *initialize_lst()
 	ft_lstaddend(&m, ft_lstnew(&X, 'X'));
 	ft_lstaddend(&m, ft_lstnew(&c, 'c'));
 	ft_lstaddend(&m, ft_lstnew(&s, 's'));
+	ft_lstaddend(&m, ft_lstnew(&p, 'p'));
 	return (m);
 }
 
@@ -138,6 +144,8 @@ int spe_out(va_list args, t_list *m, char c)
 		m = m->next;
 	if (m != NULL)
 	{
+		if (m->content_size == 'p')
+			return (((int (*)(void*))m->content)(va_arg(args, char*)));
 		if (m->content_size == 's')
 			return (((int (*)(char*))m->content)(va_arg(args, char*)));
 		return (((int (*)(int))m->content)(va_arg(args, int)));
@@ -182,8 +190,11 @@ int main()
 {
 	int i;
 	int k;
-	i = ft_printf("Ceci est un hexadecimal %s\n", "lol");
-	k = printf("Ceci est un hexadecimal %s\n", "lol");
+	char *str;
+
+	str = "lol";
+	i = ft_printf("Ceci est un pointeur %p\n", str);
+	k = printf("Ceci est un pointeur %p\n", str);
 	printf("My equal to %i\n", i);
 	printf("Official equal to %i\n", k);
 }
