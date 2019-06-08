@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 16:32:42 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/05/27 16:51:49 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/06/08 16:00:30 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,20 @@ void ft_puthex(int nb,char *base, int *i)
 	ft_putchar(base[nb % 16]);
 }
 
+int ft_put_long_hex(long nb, int *i)
+{
+	char *base;
+
+	base = "0123456789abcdef";
+	if (nb >= 16)
+	{
+		*i += 1;
+		ft_puthex(nb / 16,base, i);
+	}
+	ft_putchar(base[nb % 16]);
+	return (*i);
+}
+
 int x(int nb)
 {
 	int i;
@@ -105,7 +119,11 @@ int s(char *str)
 
 int p (void *ptr)
 {
-	return(s(ft_itoa((int)ptr)));
+	int i;
+
+	i = 1;
+	ft_putstr("0x");
+	return(2 + ft_put_long_hex((long)ptr, &i));
 }
 
 /*t_f *ft_newt_f(char c, fptr f)
@@ -145,7 +163,7 @@ int spe_out(va_list args, t_list *m, char c)
 	if (m != NULL)
 	{
 		if (m->content_size == 'p')
-			return (((int (*)(void*))m->content)(va_arg(args, char*)));
+			return (((int (*)(void*))m->content)(va_arg(args, void*)));
 		if (m->content_size == 's')
 			return (((int (*)(char*))m->content)(va_arg(args, char*)));
 		return (((int (*)(int))m->content)(va_arg(args, int)));
@@ -192,9 +210,9 @@ int main()
 	int k;
 	char *str;
 
-	str = "lol";
-	i = ft_printf("Ceci est un pointeur %p\n", str);
-	k = printf("Ceci est un pointeur %p\n", str);
-	printf("My equal to %i\n", i);
-	printf("Official equal to %i\n", k);
+	str = "loldd";
+	//i = ft_printf("Ceci est un pointeur %p\n", str);
+	k = printf("Ceci est un pointeur %f\n", 5.1234567);
+	//printf("My equal to %i\n", i);
+	//printf("Official equal to %i\n", k);
 }
