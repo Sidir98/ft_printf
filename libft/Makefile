@@ -6,7 +6,7 @@
 #    By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 21:31:16 by ibouabda          #+#    #+#              #
-#    Updated: 2019/05/22 14:27:49 by ibouabda         ###   ########.fr        #
+#    Updated: 2019/06/09 16:59:04 by ibouabda         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRC_NAME = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isprint.c ft_isdigit.c \
 		ft_strsplit.c ft_isascii.c ft_lstaddafter.c ft_lstaddend.c ft_putstrlst.c\
 		ft_3dstrin.c ft_2dstrcmp.c ft_3dputstr.c ft_2dstrlen.c ft_3dstrlen.c ft_sqrt.c\
 		ft_2dputstr.c ft_2dstrdel.c ft_sqrt_aprox.c ft_3dstrdel.c ft_putnbr_count.c\
-		ft_strrev.c
+		ft_strrev.c ft_putdouble.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 15:22:12 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/05/22 18:04:08 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:42:45 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,5 @@ void				ft_2dstrdel(char **as);
 void				ft_3dstrdel(char ***tetrim);
 void				ft_putnbr_count(int nb, int* i);
 char				*ft_strrev(char *str);
+void				ft_putdouble(int nb, int *i);
 #endif

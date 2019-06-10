@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 16:32:42 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/06/08 16:00:30 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/06/10 17:32:54 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,19 +126,17 @@ int p (void *ptr)
 	return(2 + ft_put_long_hex((long)ptr, &i));
 }
 
-/*t_f *ft_newt_f(char c, fptr f)
+int f (double nb)
 {
-	t_f *newf;
-
-	if (!(newf = (t_f *)malloc(sizeof(t_f))))
-		return (NULL);
-	if (f == NULL)
-		newf->ft = NULL;
-	else
-		newf->ft = f;
+	int i;
+	int nbcast;
+	i = 1;
 	
-	return newf;
-}*/
+	nbcast = nb * 1000000;
+	//printf("%i\n", nbcast);
+	ft_putdouble(nbcast, &i);
+	return (i);
+}
 
 t_list *initialize_lst()
 {
@@ -153,6 +151,7 @@ t_list *initialize_lst()
 	ft_lstaddend(&m, ft_lstnew(&c, 'c'));
 	ft_lstaddend(&m, ft_lstnew(&s, 's'));
 	ft_lstaddend(&m, ft_lstnew(&p, 'p'));
+	ft_lstaddend(&m, ft_lstnew(&f, 'f'));
 	return (m);
 }
 
@@ -162,6 +161,8 @@ int spe_out(va_list args, t_list *m, char c)
 		m = m->next;
 	if (m != NULL)
 	{
+		if (m->content_size == 'f')
+			return (((int (*)(double))m->content)(va_arg(args, double)));
 		if (m->content_size == 'p')
 			return (((int (*)(void*))m->content)(va_arg(args, void*)));
 		if (m->content_size == 's')
@@ -209,10 +210,12 @@ int main()
 	int i;
 	int k;
 	char *str;
+	long test;
 
+	
 	str = "loldd";
-	//i = ft_printf("Ceci est un pointeur %p\n", str);
-	k = printf("Ceci est un pointeur %f\n", 5.1234567);
+	i = ft_printf("Ceci est un double %f\n", 245.535);
+	k = printf("Ceci est un double %f\n", 245.535);
 	//printf("My equal to %i\n", i);
 	//printf("Official equal to %i\n", k);
 }
