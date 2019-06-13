@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 16:32:42 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/06/10 17:32:54 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/06/12 15:37:36 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,12 +129,35 @@ int p (void *ptr)
 int f (double nb)
 {
 	int i;
-	int nbcast;
-	i = 1;
+	int mod;
+	float nbcast;
 	
-	nbcast = nb * 1000000;
-	//printf("%i\n", nbcast);
-	ft_putdouble(nbcast, &i);
+	nbcast = nb;
+	//printf("\nunit : %i stop\n\n", nbcast);
+	ft_putnbr_count(nbcast, &i);
+	ft_putchar('.');
+	nb = nb - (double)nbcast;
+	nb = nb * 1000000;
+	nbcast = nb + 1e-9;
+	//printf("\nfloat : %f stop\n\n", nb);
+	//printf("\nfloatint : %i stop\n\n", (int)nb);
+	if (nbcast < 0)
+		nbcast = -nbcast;
+	mod = ft_countnumbers(nbcast);
+	//printf("unit : %i stop\n", nbcast);
+	//printf("numbers : %i stop \n", mod);
+	while (mod < 6)
+	{
+		ft_putchar('0');
+		mod++;
+		i++;
+	}
+	//printf("float : %f\n", nbcast);
+	ft_putnbr_count(nbcast, &i);
+	/*if (ifloat != 6)
+	{
+		while ()
+	}*/
 	return (i);
 }
 
@@ -210,12 +233,16 @@ int main()
 	int i;
 	int k;
 	char *str;
-	long test;
+	double d;
+	int		nb;
 
 	
-	str = "loldd";
-	i = ft_printf("Ceci est un double %f\n", 245.535);
-	k = printf("Ceci est un double %f\n", 245.535);
+	//str = "loldd";
+	//i = ft_printf("Ceci est un double %f\n", 3669.3669);
+	//k = printf("Ceci est un double %f\n", 3669.3669);
 	//printf("My equal to %i\n", i);
 	//printf("Official equal to %i\n", k);
+	d = 3669.5358;
+	nb = d;
+	printf("d = %f, nb = %i, d - nb = %f", d, nb, d - (d - nb));
 }

@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putdouble.c                                     :+:      :+:    :+:   */
+/*   ft_countnumbers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/09 16:37:15 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/06/11 17:58:10 by ibouabda         ###   ########.fr       */
+/*   Created: 2019/06/11 16:28:04 by ibouabda          #+#    #+#             */
+/*   Updated: 2019/06/11 16:52:40 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void ft_putdouble(double n, int *i)
+int ft_countnumbers(int nb)
 {
-	unsigned int tmp;
+	int i;
 
-	if (n < 0)
+	i = 1;
+	if (nb < 0)
+		nb = -nb;
+	while (nb >= 10)
 	{
-		ft_putchar('-');
-		tmp = -n;
-		*i += 1;
+		nb = nb / 10;
+		i++;
 	}
-	else
-		tmp = n;
-	if (tmp >= 10)
-	{
-		*i += 1;
-		ft_putnbr_count(tmp / 10, i);
-	}
-	ft_putchar('0' + tmp % 10);
+	return (i);
 }
