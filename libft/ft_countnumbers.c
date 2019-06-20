@@ -6,13 +6,13 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:28:04 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/06/11 16:52:40 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/06/20 16:00:28 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_countnumbers(int nb)
+int	ft_countnumbers(int nb)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (nb < 0)

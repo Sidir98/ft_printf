@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 16:32:42 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/06/12 15:37:36 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/06/20 17:50:38 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,38 +126,54 @@ int p (void *ptr)
 	return(2 + ft_put_long_hex((long)ptr, &i));
 }
 
-int f (double nb)
+int arrondi(double nb, int b)
+{
+	int i;
+	int m;
+	int anb;
+
+	i = 0;
+	m = 10;
+	while (i < b)
+	{
+		m = m * 10;
+		i++;
+	}
+	anb = nb;
+	nb = nb - anb;
+	anb = nb * m;
+	if (anb % 10 >= 5)
+	{
+		anb = anb / 10;
+		anb++;
+	}
+	else
+		anb = anb / 10;
+	return (anb);
+}
+
+int f (double nb) //ajouter precision variable
 {
 	int i;
 	int mod;
-	float nbcast;
+	int numbers;
+	int nbcast;
 	
+	numbers = 6;
 	nbcast = nb;
-	//printf("\nunit : %i stop\n\n", nbcast);
 	ft_putnbr_count(nbcast, &i);
 	ft_putchar('.');
-	nb = nb - (double)nbcast;
-	nb = nb * 1000000;
-	nbcast = nb + 1e-9;
-	//printf("\nfloat : %f stop\n\n", nb);
-	//printf("\nfloatint : %i stop\n\n", (int)nb);
-	if (nbcast < 0)
-		nbcast = -nbcast;
+	if (nb < 0)
+		nb = -nb;
+	nbcast = arrondi(nb, numbers);
 	mod = ft_countnumbers(nbcast);
-	//printf("unit : %i stop\n", nbcast);
-	//printf("numbers : %i stop \n", mod);
-	while (mod < 6)
+	while (mod < numbers)
 	{
 		ft_putchar('0');
 		mod++;
 		i++;
 	}
-	//printf("float : %f\n", nbcast);
 	ft_putnbr_count(nbcast, &i);
-	/*if (ifloat != 6)
-	{
-		while ()
-	}*/
 	return (i);
 }
 
@@ -178,9 +194,24 @@ t_list *initialize_lst()
 	return (m);
 }
 
-int spe_out(va_list args, t_list *m, char c)
+int spe_out(va_list args, t_list *m, char *str)
 {
-	while (m->content_size != c && m->next != NULL)
+	int i;
+	int nb;
+
+	i = 0;
+	if (str[i] > '0' && str[i] <= '9')
+	{
+		nb = ft_atoi(str);
+		while (i < nb)
+		{
+			ft_putchar(' ');
+			i++;
+		}
+		i = ft_countnumbers(nb);
+	}
+	printf("i = %i STOP\n",i);
+	while (m->content_size != str[i] && m->next != NULL)
 		m = m->next;
 	if (m != NULL)
 	{
@@ -217,7 +248,7 @@ int ft_printf(char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			count += spe_out(args, m, str[i + 1]) - 2;
+			count += spe_out(args, m, str + i + 1) - 2;
 			i++;
 		}
 		else
@@ -233,13 +264,13 @@ int main()
 	int i;
 	int k;
 	char *str;
-	double d;
+	double	d;
 	int		nb;
 
 	
-	//str = "loldd";
-	//i = ft_printf("Ceci est un double %f\n", 3669.3669);
-	//k = printf("Ceci est un double %f\n", 3669.3669);
+	str = "loldd";
+	//i = ft_printf("Ceci est un double %f\n", -477.2477777);
+	k = printf("Ceci est un nombre %o\n", 99);
 	//printf("My equal to %i\n", i);
 	//printf("Official equal to %i\n", k);
 	d = 3669.5358;

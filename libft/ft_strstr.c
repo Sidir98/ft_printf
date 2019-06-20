@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 10:14:36 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/05/15 18:14:20 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/06/20 15:56:04 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strstr(const char *str, const char *to_find)
 	i = 0;
 	j = 0;
 	if (str == NULL)
-		return 0;
+		return (0);
 	max = ft_strlen((char*)to_find);
 	if (max <= 0)
 		return (0);

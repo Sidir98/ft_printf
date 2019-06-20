@@ -6,13 +6,13 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 16:37:15 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/06/11 17:58:10 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/06/20 15:58:40 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_putdouble(double n, int *i)
+void	ft_putdouble(double n, int *i)
 {
 	unsigned int tmp;
 
