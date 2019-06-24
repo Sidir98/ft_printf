@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:50:22 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/06/20 17:50:39 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/06/21 15:05:23 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,13 +194,15 @@ int main()
 	char *str;
 	double d;
 	int nb;
+	int i;
+	int k;
 
 	str = "loldd";
-	//i = ft_printf("Ceci est un double %f\n", -477.2477777);
-	//k = printf("Ceci est un double %i\n", 477);
+	i = ft_printf("Ceci est un double %f\n", -477);
+	k = printf("Ceci est un double %i\n", 477);
 	//printf("My equal to %i\n", i);
 	//printf("Official equal to %i\n", k);
 	d = 3669.5358;
 	nb = d;
-	printf("d = %f, nb = %i, d - nb = %f123 \n", d, nb, d - (d - nb));
+	//printf("d = %f, nb = %i, d - nb = %f123 \n", d, nb, d - (d - nb));
 }

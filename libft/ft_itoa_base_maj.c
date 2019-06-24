@@ -6,13 +6,13 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 16:13:20 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/06/20 16:15:00 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/06/21 15:01:58 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		size_base(int nb, int base)
+int		size_base_maj(int nb, int base)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ int		size_base(int nb, int base)
 	return (i);
 }
 
-char	*ft_itoa_base(int nb, int base)
+char	*ft_itoa_base_maj(int nb, int base)
 {
 	char	*base_def;
 	char	*number;
@@ -38,7 +38,7 @@ char	*ft_itoa_base(int nb, int base)
 	base_def = "0123456789ABCDEF";
 	if (base == 10)
 		minus = 1;
-	size = size_base(nb, base) + minus;
+	size = size_base_maj(nb, base) + minus;
 	number = ft_strnew(size);
 	while (nb != 0)
 	{
