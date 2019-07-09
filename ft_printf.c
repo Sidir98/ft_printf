@@ -5,225 +5,70 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/20 16:32:42 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/06/21 15:04:26 by ibouabda         ###   ########.fr       */
+/*   Created: 2019/06/19 12:50:22 by ibouabda          #+#    #+#             */
+/*   Updated: 2019/07/09 16:32:42 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int di(int nb)
-{
-	int i;
-
-	i = 1;
-	ft_putnbr_count(nb, &i);
-	return (i);
-}
-
-int u(int nb)
-{
-	int i;
-
-	i = 1;
-	ft_putnbr_count(ABS(nb), &i);
-	return (i);
-}
-
-int o(int nb)
-{
-	int i;
-	char * str;
-
-	i = 0;
-	str = ft_strnew(10);
-	while (nb >= 8)
-	{
-		str[i] = ('0' + (nb % 8));
-		nb = nb / 8;
-		i++;
-	}
-	str[i] = '0' + nb;
-	i++;
-	str[i] = '\0';
-	ft_putstr(ft_strrev(str));
-	return (i);
-}
-
-void ft_puthex(int nb,char *base, int *i)
-{
-	if (nb >= 16)
-	{
-		*i += 1;
-		ft_puthex(nb / 16,base, i);
-	}
-	ft_putchar(base[nb % 16]);
-}
-
-int ft_put_long_hex(long nb, int *i)
-{
-	char *base;
-
-	base = "0123456789abcdef";
-	if (nb >= 16)
-	{
-		*i += 1;
-		ft_puthex(nb / 16,base, i);
-	}
-	ft_putchar(base[nb % 16]);
-	return (*i);
-}
-
-int x(int nb)
-{
-	int i;
-
-	i = 1;
-	char *base;
-
-	base = "0123456789abcdef";
-	ft_puthex(nb,base, &i);
-	return(i);
-}
-
-int X(int nb)
-{
-	int i;
-
-	i = 1;
-	char *base;
-
-	base = "0123456789ABCDEF";
-	ft_puthex(nb,base, &i);
-	return(i);
-}
-
-int c(int c)
-{
-	ft_putchar(c);
-	return (1);
-}
-
-int s(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		ft_putchar(str[i]);
-		i++;
-	}
-	return (i);
-}
-
-int p (void *ptr)
-{
-	int i;
-
-	i = 1;
-	ft_putstr("0x");
-	return(2 + ft_put_long_hex((long)ptr, &i));
-}
-
-int arrondi(double nb, int b)
-{
-	int i;
-	int m;
-	int anb;
-
-	i = 0;
-	m = 10;
-	while (i < b)
-	{
-		m = m * 10;
-		i++;
-	}
-	anb = nb;
-	nb = nb - anb;
-	anb = nb * m;
-	if (anb % 10 >= 5)
-	{
-		anb = anb / 10;
-		anb++;
-	}
-	else
-		anb = anb / 10;
-	return (anb);
-}
-
-int f (double nb) //ajouter precision variable
-{
-	int i;
-	int mod;
-	int numbers;
-	int nbcast;
-	
-	numbers = 6;
-	nbcast = nb;
-	ft_putnbr_count(nbcast, &i);
-	ft_putchar('.');
-	if (nb < 0)
-		nb = -nb;
-	nbcast = arrondi(nb, numbers);
-	mod = ft_countnumbers(nbcast);
-	while (mod < numbers)
-	{
-		ft_putchar('0');
-		mod++;
-		i++;
-	}
-	ft_putnbr_count(nbcast, &i);
-	return (i);
-}
-
 t_list *initialize_lst()
 {
 	t_list *m;
 
-	m = ft_lstnew(m, 'd');
-	ft_lstaddend(&m, ft_lstnew(&di, 'i'));
+	m = ft_lstnew(&ft_itoa, 'd');
+	ft_lstaddend(&m, ft_lstnew(&ft_itoa, 'i'));
 	ft_lstaddend(&m, ft_lstnew(&o, 'o'));
 	ft_lstaddend(&m, ft_lstnew(&u, 'u'));
 	ft_lstaddend(&m, ft_lstnew(&x, 'x'));
 	ft_lstaddend(&m, ft_lstnew(&X, 'X'));
 	ft_lstaddend(&m, ft_lstnew(&c, 'c'));
 	ft_lstaddend(&m, ft_lstnew(&s, 's'));
-	ft_lstaddend(&m, ft_lstnew(&p, 'p'));
 	ft_lstaddend(&m, ft_lstnew(&f, 'f'));
+	ft_lstaddend(&m, ft_lstnew(&p, 'p'));
 	return (m);
 }
 
 int spe_out(va_list args, t_list *m, char *str)
 {
 	int i;
+	int size;
+	int precs;
+	char *toprint;
 	int nb;
 
+	precs = 6;
+	size = 0;
 	i = 0;
-	if (str[i] > '0' && str[i] <= '9')
+	nb = 0;
+	if (str[size] > '0' && str[size] <= '9')
 	{
 		nb = ft_atoi(str);
-		while (i < nb)
-		{
-			ft_putchar(' ');
-			i++;
-		}
-		i = ft_countnumbers(nb);
+		size = ft_countnumbers(nb);
 	}
-	printf("i = %i STOP\n",i);
-	while (m->content_size != str[i] && m->next != NULL)
+	//printf("size : %i\n", size);
+	//printf("size : %c\n", str[size]);
+	while ((int)(m->content_size) != str[size] && m->next)
 		m = m->next;
-	if (m != NULL)
+	if ((int)(m->content_size) == str[size])
 	{
-		if (m->content_size == 'f')
-			return (((int (*)(double))m->content)(va_arg(args, double)));
-		if (m->content_size == 'p')
-			return (((int (*)(void*))m->content)(va_arg(args, void*)));
-		if (m->content_size == 's')
-			return (((int (*)(char*))m->content)(va_arg(args, char*)));
-		return (((int (*)(int))m->content)(va_arg(args, int)));
+		//printf("letter : %c, trueletter : %c", (int)m->content_size, str[size]);
+		if ((int)m->content_size == 'f')
+			toprint = (((char *(*)(double, int))m->content)(va_arg(args, double), precs));
+		else if ((int)m->content_size == 'p')
+			toprint = (((char *(*)(void *))m->content)(va_arg(args, void *)));
+		else if ((int)m->content_size == 's')
+			toprint = (((char *(*)(char *))m->content)(va_arg(args, char*)));
+		else
+			toprint = (((char *(*)(int))m->content)(va_arg(args, int)));
 	}
-	return (0);
+	while (i < (nb - (int)ft_strlen(toprint)))
+	{
+		ft_putchar(' ');
+		i++;
+	}
+	ft_putstr(toprint);
+	return (ft_strlen(toprint) + nb);
 }
 
 int ft_printf(char *str, ...)
@@ -231,12 +76,12 @@ int ft_printf(char *str, ...)
 	va_list args;
 	t_list *m;
 	int i;
+	int k;
 	int count;
-	int (*f) (int);
-
 
 	i = 0;
 	count = 0;
+	k = 0;
 	if (str == NULL)
 	{
 		ft_putstr("Error no arguments\n");
@@ -244,15 +89,17 @@ int ft_printf(char *str, ...)
 	}
 	m = initialize_lst();
 	va_start(args, str);
-	while (str[i])
+	while (str[i + k])
 	{
-		if (str[i] == '%')
+		if (str[i + k] == '%')
 		{
-			count += spe_out(args, m, str + i + 1) - 2;
-			i++;
+			k++;
+			count += spe_out(args, m, str + i + k);
+			while (!ft_strchr("%cspdiouxXf", str[i + k]))
+				k++;
 		}
 		else
-			ft_putchar(str[i]);
+			ft_putchar(str[i + k]);
 		i++;
 	}
 	va_end(args);
@@ -261,19 +108,13 @@ int ft_printf(char *str, ...)
 
 int main()
 {
+	char *str;
 	int i;
 	int k;
-	char *str;
-	double	d;
-	int		nb;
 
-	
 	str = "loldd";
-	i = ft_printf("Ceci est un double %o\n", 99);
-	k = printf("Ceci est un nombre %o\n", 99);
+	i = ft_printf("Ceci est un test %400s\n", "Heeeeeeee Bernard");
+	k = printf("Ceci est un test %400s\n", "Heeeeeeee Bernard");
 	//printf("My equal to %i\n", i);
 	//printf("Official equal to %i\n", k);
-	d = 3669.5358;
-	nb = d;
-	//printf("d = %f, nb = %i, d - nb = %f", d, nb, d - (d - nb));
 }
