@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 15:22:12 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/06/20 17:49:08 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/07/11 16:41:46 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,5 @@ void				ft_putdouble(double nb, int *i);
 int					ft_countnumbers(int nb);
 char				*ft_itoa_base(int nb, int base);
 char				*ft_itoa_base_maj(int nb, int base);
-
+char				*ft_strchar(int nb, char c);
 #endif
