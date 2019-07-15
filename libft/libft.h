@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 15:22:12 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/07/11 16:41:46 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/07/15 18:32:06 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ size_t content_size);
 void				ft_putstrlst(t_list *m);
 void				ft_lstaddafter(t_list **alst, t_list *new);
 t_list				*ft_lstnewstr(char *content, size_t content_size);
-void				ft_lstdellink(t_list *m);
+void				ft_lstdellink(void *content, size_t content_size);
 char				**ft_2dstrnew(size_t size);
 char				***ft_3dstrnew(size_t size);
 int					ft_3dstrin(char ***s1, char ***s2);
@@ -111,4 +111,6 @@ int					ft_countnumbers(int nb);
 char				*ft_itoa_base(int nb, int base);
 char				*ft_itoa_base_maj(int nb, int base);
 char				*ft_strchar(int nb, char c);
+t_list				*ft_lstnewc(void *content, size_t c);
+void				ft_lstdelm(t_list **alst);
 #endif

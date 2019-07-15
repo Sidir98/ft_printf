@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scpf.c                                             :+:      :+:    :+:   */
+/*   cpf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:02:16 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/07/09 16:04:59 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/07/15 19:06:35 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char *s(char *str)
-{
-	return (str);
-}
 
 char *c(int c)
 {
@@ -29,14 +24,20 @@ char *c(int c)
 
 char *p(void *ptr)
 {
-	return(ft_strjoin("0x", ft_itoa_base((int)ptr, 16)));
+	char *todel;
+	char *toreturn;
+
+	todel = ft_itoa_base((int)ptr, 16);
+	toreturn = ft_strjoin("0x",todel);
+	ft_strdel(&todel);
+	return(toreturn);
 }
 
 int arrondi(double nb, int b)
 {
 	int i;
-	int m;
-	int anb;
+	long long int m;
+	long long int anb;
 
 	i = 0;
 	m = 10;
@@ -62,10 +63,11 @@ char *f(double nb, int precs)
 {
 	int i;
 	int mod;
-	int nbcast;
+	long long int nbcast;
 	char *ints;
 	char *floats;
 	char *todel;
+	char *todel2;
 
 	i = 0;
 	nbcast = nb;
@@ -81,9 +83,14 @@ char *f(double nb, int precs)
 		floats[i + 1] = '0';
 		i++;
 	}
-	todel = ft_strjoin(floats, ft_itoa(nbcast));
-	floats = ft_strjoin(ints,todel);
-	free(ints);
-	free(todel);
+	todel = floats;
+	todel2 = ft_itoa(nbcast);
+	floats = ft_strjoin(todel, todel2);
+	ft_strdel(&todel);
+	ft_strdel(&todel2);
+	todel = floats;
+	floats = ft_strjoin(ints, todel);
+	ft_strdel(&ints);
+	ft_strdel(&todel);
 	return (floats);
 }

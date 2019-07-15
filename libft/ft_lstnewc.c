@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstnewc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 15:12:29 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/07/15 17:40:04 by ibouabda         ###   ########.fr       */
+/*   Created: 2019/07/15 16:55:49 by ibouabda          #+#    #+#             */
+/*   Updated: 2019/07/15 17:12:31 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
+#include "libft.h"
 
-# define PRINTF_H
-# define ABS(Value) (Value < 0 ? Value * -1 : Value)
-
-typedef int (*fptr)(int);
-
-typedef	struct		s_f
+t_list	*ft_lstnewc(void *content, size_t c)
 {
-	fptr			ft;
-}					t_f;
+	t_list *newlist;
 
-char	*u(int nb);
-char	*o(int nb);
-char	*x(int nb);
-char	*X(int nb);
-char	*c(int c);
-char	*p(void *ptr);
-int		arrondi(double nb, int b);
-char	*f(double nb, int precs);
-
-# include "libft/libft.h"
-# include <stdarg.h>
-# include "stdio.h"
-#endif
+	if (!(newlist = (t_list *)malloc(sizeof(t_list))))
+		return (NULL);
+		newlist->content_size = c;
+		newlist->content = content;
+	newlist->next = NULL;
+	return (newlist);
+}

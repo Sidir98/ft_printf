@@ -6,12 +6,11 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 16:20:08 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/05/22 18:16:32 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:55:42 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 t_list	*ft_lstnew(void *content, size_t content_size)
 {
