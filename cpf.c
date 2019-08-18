@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:02:16 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/07/15 19:06:35 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:39:24 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,21 @@ int arrondi(double nb, int b)
 		anb = anb / 10;
 	return (anb);
 }
+void manage_str(char **ints, char **floats, int nbcast)
+{
+	char *todel;
+	char *todel2;
 
+	todel2 = ft_itoa(nbcast);
+	todel = *floats;
+	*floats = ft_strjoin(todel, todel2);
+	ft_strdel(&todel);
+	ft_strdel(&todel2);
+	todel = *floats;
+	*floats = ft_strjoin(*ints, todel);
+	ft_strdel(ints);
+	ft_strdel(&todel);
+}
 char *f(double nb, int precs)
 {
 	int i;
@@ -66,8 +80,6 @@ char *f(double nb, int precs)
 	long long int nbcast;
 	char *ints;
 	char *floats;
-	char *todel;
-	char *todel2;
 
 	i = 0;
 	nbcast = nb;
@@ -83,14 +95,6 @@ char *f(double nb, int precs)
 		floats[i + 1] = '0';
 		i++;
 	}
-	todel = floats;
-	todel2 = ft_itoa(nbcast);
-	floats = ft_strjoin(todel, todel2);
-	ft_strdel(&todel);
-	ft_strdel(&todel2);
-	todel = floats;
-	floats = ft_strjoin(ints, todel);
-	ft_strdel(&ints);
-	ft_strdel(&todel);
+	manage_str(&ints, &floats, nbcast);
 	return (floats);
 }

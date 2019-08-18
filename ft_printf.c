@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:50:22 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/07/15 18:59:57 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:39:50 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ char *spe_search(va_list args, t_list *m, char *str, int precs)
 	{
 		printf("ok");
 		if ((int)m->content_size == 'f')
-			return (((char *(*)(double, int))m->content)(va_arg(args, double), precs));
+			return (((char *(*)(double, int))m->content)\
+			(va_arg(args, double), precs));
 		else if ((int)m->content_size == 'p')
 			return (((char *(*)(void *))m->content)(va_arg(args, void *)));
 		else if ((int)m->content_size == 's')
@@ -76,7 +77,8 @@ void modify_toprint(char **str, int *nbl, int *nbp, char **toprint)
 
 	if (*nbp > 0 && *nbp < (int)ft_strlen(*toprint) && **str == 's')
 		*toprint[*nbp] = '\0';
-	if (ft_strchr("diouxX", **str) && *nbp > 0 && *nbp > (int)ft_strlen(*toprint))
+	if (ft_strchr("diouxX", **str) && *nbp > 0 && *nbp > \
+	(int)ft_strlen(*toprint))
 	{
 		todel = *toprint;
 		todel2 = ft_strchar(*nbp - ft_strlen(todel), '0');
@@ -135,14 +137,14 @@ int ft_printf(char *str, ...)
 	int k;
 	int count;
 
-	if (!(m = initialize(&i, &k, &count, str)))
-		return (-1);
+	m = initialize(&i, &k, &count, str);
 	va_start(args, str);
 	while (str[i + k])
 	{
 		if (str[i + k] == '%')
 		{
-			k++;
+			i--;
+			k += 2;
 			count += spe_out(args, m, str + i + k);
 			while (!ft_strchr("%cspdiouxXf", str[i + k]))
 				k++;
@@ -151,8 +153,6 @@ int ft_printf(char *str, ...)
 			ft_putchar(str[i + k]);
 		i++;
 	}
-	if (i > 0 && !str[i + k])
-		i--;
 	va_end(args);
 	ft_lstdelm(&m);
 	return (i + count);
@@ -165,11 +165,9 @@ int main()
 	int k;
 
 	str = "loldd";
-	i = ft_printf("Ceci est un test %20p\n", str);
-	k = printf("Ceci est un test %20p\n", str);
+	i = ft_printf(",. %i %f\n", 1, 2.123456);
+	k = printf("'. %i %f\n", 1, 2.123456);
 	printf("My equal to %i\n", i);
 	printf("Official equal to %i\n", k);
-	while (1 == 1)
-		i++;
 	return (0);
 }
