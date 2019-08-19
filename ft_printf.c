@@ -6,13 +6,13 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:50:22 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/07/16 16:39:50 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/08/19 13:26:13 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_list *initialize_lst()
+t_list *initialize_lst() //initialise les differents maillons/reperes
 {
 	t_list *m;
 
@@ -30,7 +30,7 @@ t_list *initialize_lst()
 	return (m);
 }
 
-char *spe_search(va_list args, t_list *m, char *str, int precs)
+char *spe_search(va_list args, t_list *m, char *str, int precs) // va chercher dans tous les maillons le bon repere
 {
 	while ((int)(m->content_size) != str[0] && m->next)
 		m = m->next;
@@ -52,17 +52,17 @@ char *spe_search(va_list args, t_list *m, char *str, int precs)
 	return (NULL);
 }
 
-void spe_input(char **str, int *nbl, int *nbp, int *precs)
+void spe_input(char **str, int *nbl, int *nbp, int *precs) //fixe la largeur de champs ou le nombre de chiffres
 {
 	*precs = 6;
 	*nbl = 0;
 	*nbp = 0;
-	if (**str > '0' && **str <= '9')
+	if (**str > '0' && **str <= '9') //largeur de champs
 	{
 		*nbl = ft_atoi(*str);
 		*str += ft_countnumbers(*nbl);
 	}
-	if (**str == '.')
+	if (**str == '.') //nombres de chiffres
 	{
 		*str = *str + 1;
 		*nbp = ft_atoi(*str);
@@ -70,7 +70,7 @@ void spe_input(char **str, int *nbl, int *nbp, int *precs)
 		*precs = *nbp;
 	}
 }
-void modify_toprint(char **str, int *nbl, int *nbp, char **toprint)
+void modify_toprint(char **str, int *nbl, int *nbp, char **toprint) //modifie selon la largeur de champs et le nombre de chiffres
 {
 	char *todel;
 	char *todel2;
@@ -95,7 +95,7 @@ void modify_toprint(char **str, int *nbl, int *nbp, char **toprint)
 		ft_strdel(&todel2);
 	}
 }
-int spe_out(va_list args, t_list *m, char *str)
+int spe_out(va_list args, t_list *m, char *str) //s'occupe du cas %...
 {
 	int precs;
 	char *toprint;
@@ -115,7 +115,7 @@ int spe_out(va_list args, t_list *m, char *str)
 	return (nbp);
 }
 
-t_list *initialize(int *i, int *k, int *count, char *str)
+t_list *initialize(int *i, int *k, int *count, char *str) // lance l'initialisation de la liste
 {
 	*i = 0;
 	*count = 0;
