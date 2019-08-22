@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:50:22 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/08/19 13:26:13 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/08/22 16:42:59 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void modify_toprint(char **str, int *nbl, int *nbp, char **toprint) //modifie se
 		ft_strdel(&todel2);
 	}
 }
+
 int spe_out(va_list args, t_list *m, char *str) //s'occupe du cas %...
 {
 	int precs;
@@ -108,8 +109,10 @@ int spe_out(va_list args, t_list *m, char *str) //s'occupe du cas %...
 		ft_putstr("Bad argument");
 		exit(0);
 	}
+	//ft_putendl(toprint);
 	modify_toprint(&str, &nbl, &nbp, &toprint);
-	ft_putstr(toprint);
+	//ft_putendl(toprint);
+	//ft_putstr(toprint);
 	nbp = ft_strlen(toprint);
 	ft_strdel(&toprint);
 	return (nbp);
@@ -161,13 +164,14 @@ int ft_printf(char *str, ...)
 int main()
 {
 	char *str;
-	int i;
+	//int i;
 	int k;
 
 	str = "loldd";
-	i = ft_printf(",. %i %f\n", 1, 2.123456);
-	k = printf("'. %i %f\n", 1, 2.123456);
-	printf("My equal to %i\n", i);
-	printf("Official equal to %i\n", k);
+	//i = ft_printf(",. %i %f\n", 1, 2.123456);
+	k = printf("test : %-15.5xlol\n", 15635);
+	k = printf("test : %15.5xlol\n", 15635);
+	//printf("My equal to %i\n", i);
+	//printf("Official equal to %i\n", k);
 	return (0);
 }
