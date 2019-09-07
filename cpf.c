@@ -6,13 +6,13 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:02:16 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/07/16 15:39:24 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/09/07 17:05:55 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char *c(int c)
+char *c(int c) //char * de la lettre
 {
 	char *str;
 
@@ -22,7 +22,7 @@ char *c(int c)
 
 }
 
-char *p(void *ptr)
+char *p(void *ptr) // char * du pointeur
 {
 	char *todel;
 	char *toreturn;
@@ -33,7 +33,7 @@ char *p(void *ptr)
 	return(toreturn);
 }
 
-int arrondi(double nb, int b)
+int arrondi(double nb, int b) //gere l'arrondi
 {
 	int i;
 	long long int m;
@@ -58,7 +58,7 @@ int arrondi(double nb, int b)
 		anb = anb / 10;
 	return (anb);
 }
-void manage_str(char **ints, char **floats, int nbcast)
+void manage_str(char **ints, char **floats, int nbcast) //permet de transformer le double en un char *
 {
 	char *todel;
 	char *todel2;
@@ -73,7 +73,7 @@ void manage_str(char **ints, char **floats, int nbcast)
 	ft_strdel(ints);
 	ft_strdel(&todel);
 }
-char *f(double nb, int precs)
+char *f(double nb, int precs) // char * du type double
 {
 	int i;
 	int mod;

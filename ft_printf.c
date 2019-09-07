@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:50:22 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/08/22 16:42:59 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/09/07 17:05:56 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char *spe_search(va_list args, t_list *m, char *str, int precs) // va chercher d
 		m = m->next;
 	if ((int)(m->content_size) == str[0])
 	{
-		printf("ok");
 		if ((int)m->content_size == 'f')
 			return (((char *(*)(double, int))m->content)\
 			(va_arg(args, double), precs));
@@ -113,7 +112,7 @@ int spe_out(va_list args, t_list *m, char *str) //s'occupe du cas %...
 	modify_toprint(&str, &nbl, &nbp, &toprint);
 	//ft_putendl(toprint);
 	//ft_putstr(toprint);
-	nbp = ft_strlen(toprint);
+	nbp = ft_strlen(toprint); 
 	ft_strdel(&toprint);
 	return (nbp);
 }
@@ -168,9 +167,9 @@ int main()
 	int k;
 
 	str = "loldd";
-	//i = ft_printf(",. %i %f\n", 1, 2.123456);
-	k = printf("test : %-15.5xlol\n", 15635);
-	k = printf("test : %15.5xlol\n", 15635);
+	i = ft_printf("test : %15.5xlol\n", 15635);
+	k = printf("test : %hi\n", (short)15635);
+	//k = printf("test : %15.5xlol\n", 15635);
 	//printf("My equal to %i\n", i);
 	//printf("Official equal to %i\n", k);
 	return (0);
