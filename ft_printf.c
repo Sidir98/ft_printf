@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:50:22 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/09/07 17:05:56 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/09/07 18:24:02 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char *spe_search(va_list args, t_list *m, char *str, int precs) // va chercher d
 		m = m->next;
 	if ((int)(m->content_size) == str[0])
 	{
+		//printf("ok\n");
 		if ((int)m->content_size == 'f')
 			return (((char *(*)(double, int))m->content)\
 			(va_arg(args, double), precs));
@@ -105,13 +106,13 @@ int spe_out(va_list args, t_list *m, char *str) //s'occupe du cas %...
 	spe_input(&str, &nbl, &nbp, &precs);
 	if (!(toprint = spe_search(args, m, str, precs)))
 	{
-		ft_putstr("Bad argument");
+		ft_putendl("Bad argument");
 		exit(0);
 	}
 	//ft_putendl(toprint);
 	modify_toprint(&str, &nbl, &nbp, &toprint);
 	//ft_putendl(toprint);
-	//ft_putstr(toprint);
+	ft_putstr(toprint);
 	nbp = ft_strlen(toprint); 
 	ft_strdel(&toprint);
 	return (nbp);
@@ -160,17 +161,22 @@ int ft_printf(char *str, ...)
 	return (i + count);
 }
 
-int main()
+int main(int argc, char **argv)
 {
+	(void)argc;
 	char *str;
-	//int i;
+	int i;
 	int k;
 
-	str = "loldd";
-	i = ft_printf("test : %15.5xlol\n", 15635);
-	k = printf("test : %hi\n", (short)15635);
+	str = "test : ";
+	str = ft_strjoin(str, argv[1]); //leaks
+	str = ft_strjoin(str, "\n");
+	i = ft_printf("test : %#15.5x\n", 15635);
+	k = printf("test : %#15.5x\n", 15635);
+	//i = ft_printf(str, ft_atoi(argv[2]));
+	//k = printf(str, ft_atoi(argv[2]));
 	//k = printf("test : %15.5xlol\n", 15635);
-	//printf("My equal to %i\n", i);
-	//printf("Official equal to %i\n", k);
+	printf("My equal to %i\n", i);
+	printf("Official equal to %i\n", k);
 	return (0);
 }
