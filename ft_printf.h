@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 15:12:29 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/09/07 17:04:42 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/09/07 18:27:11 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define ABS(Value) (Value < 0 ? Value * -1 : Value)
 # include "libft/libft.h"
 # include <stdarg.h>
-# include "stdio.h"
+# include "stdio.h" //a supprimer
 
 typedef int (*fptr)(int);
 
