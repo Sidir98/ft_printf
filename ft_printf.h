@@ -6,14 +6,13 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 15:12:29 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/09/07 18:27:11 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/09/08 17:18:41 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINTF_H
 
 # define PRINTF_H
-# define ABS(Value) (Value < 0 ? Value * -1 : Value)
 # include "libft/libft.h"
 # include <stdarg.h>
 # include "stdio.h" //a supprimer
@@ -24,6 +23,16 @@ typedef	struct		s_f
 {
 	fptr			ft;
 }					t_f;
+
+typedef	struct		spf_spe
+{
+	char			flag;
+	int				nbl;
+	int				nbp;
+	int				precs;
+	char			convert[2];
+	char			arg;
+}					pf_spe;
 
 char	*u(int nb);
 char	*o(int nb);

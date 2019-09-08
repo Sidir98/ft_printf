@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:50:22 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/09/08 13:27:11 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/09/08 18:18:28 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,20 @@ t_list *initialize_lst() //initialise les differents maillons/reperes
 	return (m);
 }
 
-char *spe_search(va_list args, t_list *m, char *str, int precs) // va chercher dans tous les maillons le bon repere
+pf_spe *ft_pf_spenew()
+{
+	pf_spe *vars;
+
+	if (!(vars = (pf_spe *)malloc(sizeof(pf_spe))))
+	{
+		ft_putendl("ft_pf_spenew malloc error");
+		exit(EXIT_FAILURE);
+	}
+	vars->precs = 6;
+	return(vars);
+}
+
+char *spe_search(va_list args, t_list *m, char *str, pf_spe *vars) // va chercher dans tous les maillons le bon repere
 {
 	while ((int)(m->content_size) != str[0] && m->next)
 		m = m->next;
@@ -38,8 +51,7 @@ char *spe_search(va_list args, t_list *m, char *str, int precs) // va chercher d
 	{
 		//printf("ok\n");
 		if ((int)m->content_size == 'f')
-			return (((char *(*)(double, int))m->content)\
-			(va_arg(args, double), precs));
+			return (((char *(*)(double, int))m->content)(va_arg(args, double), vars->precs));
 		else if ((int)m->content_size == 'p')
 			return (((char *(*)(void *))m->content)(va_arg(args, void *)));
 		else if ((int)m->content_size == 's')
@@ -52,44 +64,43 @@ char *spe_search(va_list args, t_list *m, char *str, int precs) // va chercher d
 	return (NULL);
 }
 
-void spe_input(char **str, int *nbl, int *nbp, int *precs) //fixe la largeur de champs ou le nombre de chiffres
+void spe_input(pf_spe *vars, char **str) //fixe la largeur de champs ou le nombre de chiffres
 {
-	*precs = 6;
-	*nbl = 0;
-	*nbp = 0;
+	vars->precs = 6;
+	vars->nbl = 0;
+	vars->nbp = 0;
 	if (**str > '0' && **str <= '9') //largeur de champs
 	{
-		*nbl = ft_atoi(*str);
-		*str += ft_countnumbers(*nbl);
+		vars->nbl = ft_atoi(*str);
+		*str += ft_countnumbers(vars->nbl);
 	}
 	if (**str == '.') //nombres de chiffres
 	{
 		*str = *str + 1;
-		*nbp = ft_atoi(*str);
-		*str += ft_countnumbers(*nbp);
-		*precs = *nbp;
+		vars->nbp = ft_atoi(*str);
+		*str += ft_countnumbers(vars->nbp);
+		vars->precs = vars->nbp;
 	}
 }
-void modify_toprint(char **str, int *nbl, int *nbp, char **toprint) //modifie selon la largeur de champs et le nombre de chiffres
+void modify_toprint(char **str, pf_spe *vars, char **toprint) //modifie selon la largeur de champs et le nombre de chiffres
 {
 	char *todel;
 	char *todel2;
 
-	if (*nbp > 0 && *nbp < (int)ft_strlen(*toprint) && **str == 's')
-		*toprint[*nbp] = '\0';
-	if (ft_strchr("diouxX", **str) && *nbp > 0 && *nbp > \
-	(int)ft_strlen(*toprint))
+	if (vars->nbp > 0 && vars->nbp < (int)ft_strlen(*toprint) && **str == 's')
+		*toprint[vars->nbp] = '\0';
+	if (ft_strchr("diouxX", **str) && vars->nbp > 0 && vars->nbp > (int)ft_strlen(*toprint))
 	{
 		todel = *toprint;
-		todel2 = ft_strchar(*nbp - ft_strlen(todel), '0');
+		todel2 = ft_strchar(vars->nbp - ft_strlen(todel), '0');
 		*toprint = ft_strjoin(todel2, todel);
 		ft_strdel(&todel);
 		ft_strdel(&todel2);
 	}
-	if (0 < (*nbl - (int)ft_strlen(*toprint)))
+	if (0 < (vars->nbl - (int)ft_strlen(*toprint)))
 	{
 		todel = *toprint;
-		todel2 = ft_strchar(*nbl - ft_strlen(todel), ' ');
+		todel2 = ft_strchar( vars->nbl - ft_strlen(todel), ' ');
 		*toprint = ft_strjoin(todel2, todel);
 		ft_strdel(&todel);
 		ft_strdel(&todel2);
@@ -98,24 +109,21 @@ void modify_toprint(char **str, int *nbl, int *nbp, char **toprint) //modifie se
 
 int spe_out(va_list args, t_list *m, char *str) //s'occupe du cas %...
 {
-	int precs;
 	char *toprint;
-	int nbl;
-	int nbp;
+	pf_spe *vars;
 
-	spe_input(&str, &nbl, &nbp, &precs);
-	if (!(toprint = spe_search(args, m, str, precs)))
+	vars = ft_pf_spenew();
+	spe_input(vars, &str);
+	if (!(toprint = spe_search(args, m, str, vars)))
 	{
 		ft_putendl("Bad argument");
 		exit(0);
 	}
-	//ft_putendl(toprint);
-	modify_toprint(&str, &nbl, &nbp, &toprint);
-	//ft_putendl(toprint);
+	modify_toprint(&str, vars, &toprint);
 	ft_putstr(toprint);
-	nbp = ft_strlen(toprint); 
+	vars->nbp = ft_strlen(toprint);
 	ft_strdel(&toprint);
-	return (nbp);
+	return (vars->nbp);
 }
 
 t_list *initialize(int *i, int *k, int *count, char *str) // lance l'initialisation de la liste
@@ -171,8 +179,8 @@ int main(int argc, char **argv)
 	str = "test : ";
 	str = ft_strjoin(str, argv[1]); //leaks
 	str = ft_strjoin(str, "\n");
-	i = ft_printf("test : %15i\n", (short)11316);
-	k = printf("test : %15hi\n", (short)11316);
+	i = ft_printf("test : %15.10i\n", 11316);
+	k = printf("test : %15.10i\n", 11316);
 	//i = ft_printf(str, ft_atoi(argv[2]));
 	//k = printf(str, ft_atoi(argv[2]));
 	//k = printf("test : %15.5xlol\n", 15635);
