@@ -6,11 +6,11 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 17:45:01 by ibouabda          #+#    #+#             */
-/*   Updated: 2018/11/28 17:34:19 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/08/29 18:34:44 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 static int	ft_mesure_index(char *str, char c)
 {
@@ -92,19 +92,24 @@ static char	**ft_malloc_str(char **index, char *str, char c)
 	return (index);
 }
 
-char		**ft_strsplit(char *str, char c)
+char		**ft_strsplit(char const *str, char c)
 {
 	char	**index;
 	int		j;
+	char	*str2;
 
 	if (str)
 	{
-		j = ft_mesure_index(str, c);
+		str2 = ft_strdup(str);
+		j = ft_mesure_index(str2, c);
 		if (!(index = (char **)malloc(sizeof(char *) * (j + 1))))
-			return (0);
+		{
+			ft_putendl("ft_lstnewstr malloc error");
+			exit(EXIT_FAILURE);
+		}
 		index[j] = 0;
-		index = ft_malloc_str(index, str, c);
-		return (ft_fill_index(index, str, c));
+		index = ft_malloc_str(index, str2, c);
+		return (ft_fill_index(index, str2, c));
 	}
 	return (NULL);
 }

@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_3Dstrnew.c                                      :+:      :+:    :+:   */
+/*   ft_3dstrnew.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 16:51:45 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/03/05 14:06:41 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/09/05 11:56:08 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	***ft_3dstrnew(size_t size)
 {
@@ -19,11 +18,12 @@ char	***ft_3dstrnew(size_t size)
 	size_t	i;
 
 	i = 0;
-	if (!(str = (char***)malloc(sizeof(char**) * size + 1)))
+	if (!(str = (char***)malloc(sizeof(char**) * (size + 1))))
 	{
-		return (NULL);
+		ft_putendl("ft_3dstrnew malloc error");
+		exit(EXIT_FAILURE);
 	}
-	while (i < size + 1)
+	while (i < (size + 1))
 	{
 		str[i] = NULL;
 		i++;

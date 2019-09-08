@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:50:22 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/09/07 18:24:02 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/09/08 13:27:11 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,8 +171,8 @@ int main(int argc, char **argv)
 	str = "test : ";
 	str = ft_strjoin(str, argv[1]); //leaks
 	str = ft_strjoin(str, "\n");
-	i = ft_printf("test : %#15.5x\n", 15635);
-	k = printf("test : %#15.5x\n", 15635);
+	i = ft_printf("test : %15i\n", (short)11316);
+	k = printf("test : %15hi\n", (short)11316);
 	//i = ft_printf(str, ft_atoi(argv[2]));
 	//k = printf(str, ft_atoi(argv[2]));
 	//k = printf("test : %15.5xlol\n", 15635);

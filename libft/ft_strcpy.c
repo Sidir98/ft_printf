@@ -6,9 +6,11 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 10:14:36 by ibouabda          #+#    #+#             */
-/*   Updated: 2018/11/27 14:53:16 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/08/29 13:28:28 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strcpy(char *dest, const char *src)
 {

@@ -6,9 +6,11 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 15:40:34 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/04/02 11:59:09 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/08/29 13:29:00 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_sqrt_aprox(int nb)
 {

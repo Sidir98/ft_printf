@@ -6,11 +6,11 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 14:50:35 by ibouabda          #+#    #+#             */
-/*   Updated: 2018/11/26 13:07:55 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/08/29 13:30:29 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
 void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {

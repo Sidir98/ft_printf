@@ -6,9 +6,11 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 14:18:42 by ibouabda          #+#    #+#             */
-/*   Updated: 2018/11/28 13:24:39 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/08/29 13:26:42 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_tolower(int c)
 {

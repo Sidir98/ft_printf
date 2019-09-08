@@ -6,7 +6,7 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 15:22:12 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/07/15 18:32:06 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/09/08 10:31:33 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 # define LIBFT_H
 # define ABS(Value) (Value < 0 ? Value * -1 : Value)
-
 # include <string.h>
 # include <stdlib.h>
-# include <stdio.h>
+# include <unistd.h>
 
 typedef	struct		s_list
 {
@@ -78,7 +77,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
-t_list				*ft_lstnew(void *content, size_t content_size);
+t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
@@ -86,12 +85,12 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 size_t				ft_lstlen(t_list *lst);
 void				ft_lstaddend(t_list **alst, t_list *new);
-t_list				*ft_lstmanynew(size_t lst_size, void *content,\
+t_list				*ft_lstmanynew(size_t lst_size, void const *content,\
 size_t content_size);
 void				ft_putstrlst(t_list *m);
 void				ft_lstaddafter(t_list **alst, t_list *new);
 t_list				*ft_lstnewstr(char *content, size_t content_size);
-void				ft_lstdellink(void *content, size_t content_size);
+void				ft_lstdellink(t_list *m);
 char				**ft_2dstrnew(size_t size);
 char				***ft_3dstrnew(size_t size);
 int					ft_3dstrin(char ***s1, char ***s2);
@@ -104,13 +103,18 @@ int					ft_sqrt_aprox(int nb);
 void				ft_2dputstr(char **tetrim);
 void				ft_2dstrdel(char **as);
 void				ft_3dstrdel(char ***tetrim);
-void				ft_putnbr_count(int nb, int *i);
-char				*ft_strrev(char *str);
-void				ft_putdouble(double nb, int *i);
+int					ft_size_t_del(size_t *as);
 int					ft_countnumbers(int nb);
 char				*ft_itoa_base(int nb, int base);
-char				*ft_itoa_base_maj(int nb, int base);
-char				*ft_strchar(int nb, char c);
-t_list				*ft_lstnewc(void *content, size_t c);
+void				ft_lstadd(t_list **alst, t_list *new);
+void				ft_lstdellink(t_list *m);
 void				ft_lstdelm(t_list **alst);
+t_list				*ft_lstnew(void const *content, size_t content_size);
+void				ft_putdouble(double n, int *i);
+char				*ft_strchar(int nb, char c);
+char				*ft_strrev(char *str);
+t_list				*ft_lstnewc(void *content, size_t c);
+char				*ft_itoa_base_maj(int nb, int base);
+void				ft_putnbr_count(int n, int *i);
+
 #endif

@@ -6,12 +6,11 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 14:42:02 by ibouabda          #+#    #+#             */
-/*   Updated: 2018/11/28 14:55:00 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/08/29 13:30:34 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 void	*ft_memalloc(size_t size)
 {
@@ -21,7 +20,8 @@ void	*ft_memalloc(size_t size)
 	i = 0;
 	if (!(str = (char*)malloc(sizeof(char) * size)))
 	{
-		return (NULL);
+		ft_putendl("ft_memalloc malloc error");
+		exit(EXIT_FAILURE);
 	}
 	while (i < size)
 	{

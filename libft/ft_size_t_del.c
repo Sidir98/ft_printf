@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_size_t_del.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: retounsi <retounsi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/22 15:06:41 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/08/29 13:29:42 by ibouabda         ###   ########.fr       */
+/*   Created: 2019/04/08 20:33:43 by retounsi          #+#    #+#             */
+/*   Updated: 2019/04/08 20:34:37 by retounsi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+int		ft_size_t_del(size_t *as)
 {
-	int i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	write(fd, s, i);
+	if (as != NULL)
+	{
+		free(as);
+		as = NULL;
+	}
+	return (1);
 }

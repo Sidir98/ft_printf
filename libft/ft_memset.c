@@ -6,11 +6,11 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 16:31:42 by ibouabda          #+#    #+#             */
-/*   Updated: 2018/11/16 11:22:01 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/08/29 13:30:02 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
 void	*ft_memset(void *src, int c, size_t n)
 {

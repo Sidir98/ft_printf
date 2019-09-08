@@ -6,9 +6,11 @@
 /*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 21:23:41 by ibouabda          #+#    #+#             */
-/*   Updated: 2018/11/05 22:08:29 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/08/29 13:28:49 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_sqrt(int nb)
 {
