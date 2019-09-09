@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idris <idris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:50:22 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/09/08 18:18:28 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/09/09 09:18:56 by idris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,12 @@ pf_spe *ft_pf_spenew()
 		ft_putendl("ft_pf_spenew malloc error");
 		exit(EXIT_FAILURE);
 	}
+	vars->nbl = 0;
+	vars->nbp = 0;
 	vars->precs = 6;
+	vars->flag = 0;
+	vars->convert = NULL;
+	vars->arg = 0;
 	return(vars);
 }
 
@@ -66,9 +71,11 @@ char *spe_search(va_list args, t_list *m, char *str, pf_spe *vars) // va cherche
 
 void spe_input(pf_spe *vars, char **str) //fixe la largeur de champs ou le nombre de chiffres
 {
-	vars->precs = 6;
-	vars->nbl = 0;
-	vars->nbp = 0;
+	if (ft_strchr("#0-+", **str))
+	{
+		vars->flag = **str;
+		*str += 1;
+	}
 	if (**str > '0' && **str <= '9') //largeur de champs
 	{
 		vars->nbl = ft_atoi(*str);
@@ -81,6 +88,7 @@ void spe_input(pf_spe *vars, char **str) //fixe la largeur de champs ou le nombr
 		*str += ft_countnumbers(vars->nbp);
 		vars->precs = vars->nbp;
 	}
+	if (ft_strnstrdup(*str,"l") || ft_strnstrdup(*str,"ll") || ft_strnstrdup(*str ,"h") || )
 }
 void modify_toprint(char **str, pf_spe *vars, char **toprint) //modifie selon la largeur de champs et le nombre de chiffres
 {
@@ -113,6 +121,7 @@ int spe_out(va_list args, t_list *m, char *str) //s'occupe du cas %...
 	pf_spe *vars;
 
 	vars = ft_pf_spenew();
+	
 	spe_input(vars, &str);
 	if (!(toprint = spe_search(args, m, str, vars)))
 	{

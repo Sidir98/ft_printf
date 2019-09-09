@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idris <idris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 15:12:29 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/09/08 17:18:41 by ibouabda         ###   ########.fr       */
+/*   Updated: 2019/09/09 08:43:08 by idris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef	struct		spf_spe
 	int				nbl;
 	int				nbp;
 	int				precs;
-	char			convert[2];
+	char			*convert;
 	char			arg;
 }					pf_spe;
 
