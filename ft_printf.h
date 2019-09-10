@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idris <idris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 15:12:29 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/09/09 08:43:08 by idris            ###   ########.fr       */
+/*   Updated: 2019/09/09 13:31:28 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ char	*c(int c);
 char	*p(void *ptr);
 int		arrondi(double nb, int b);
 char	*f(double nb, int precs);
+int		ft_prstr2chr(char *src, char *to_find);
 
 #endif

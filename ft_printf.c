@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idris <idris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ibouabda <ibouabda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 12:50:22 by ibouabda          #+#    #+#             */
-/*   Updated: 2019/09/09 09:18:56 by idris            ###   ########.fr       */
+/*   Updated: 2019/09/09 14:18:35 by ibouabda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char *spe_search(va_list args, t_list *m, char *str, pf_spe *vars) // va cherche
 		m = m->next;
 	if ((int)(m->content_size) == str[0])
 	{
-		//printf("ok\n");
 		if ((int)m->content_size == 'f')
 			return (((char *(*)(double, int))m->content)(va_arg(args, double), vars->precs));
 		else if ((int)m->content_size == 'p')
@@ -71,7 +70,7 @@ char *spe_search(va_list args, t_list *m, char *str, pf_spe *vars) // va cherche
 
 void spe_input(pf_spe *vars, char **str) //fixe la largeur de champs ou le nombre de chiffres
 {
-	if (ft_strchr("#0-+", **str))
+	if (ft_strchr("#0-+", **str)) // utiliser ft_prstr2chr avec arg
 	{
 		vars->flag = **str;
 		*str += 1;
@@ -88,7 +87,12 @@ void spe_input(pf_spe *vars, char **str) //fixe la largeur de champs ou le nombr
 		*str += ft_countnumbers(vars->nbp);
 		vars->precs = vars->nbp;
 	}
-	if (ft_strnstrdup(*str,"l") || ft_strnstrdup(*str,"ll") || ft_strnstrdup(*str ,"h") || )
+	if (ft_strnstrdup(*str,"l", 1, &vars->convert)
+	|| ft_strnstrdup(*str,"ll", 2, &vars->convert)
+	|| ft_strnstrdup(*str ,"h", 1, &vars->convert)
+	|| ft_strnstrdup(*str ,"hh", 2, &vars->convert)
+	|| ft_strnstrdup(*str ,"L", 1, &vars->convert))
+		*str += ft_strlen(vars->convert);
 }
 void modify_toprint(char **str, pf_spe *vars, char **toprint) //modifie selon la largeur de champs et le nombre de chiffres
 {
@@ -97,7 +101,8 @@ void modify_toprint(char **str, pf_spe *vars, char **toprint) //modifie selon la
 
 	if (vars->nbp > 0 && vars->nbp < (int)ft_strlen(*toprint) && **str == 's')
 		*toprint[vars->nbp] = '\0';
-	if (ft_strchr("diouxX", **str) && vars->nbp > 0 && vars->nbp > (int)ft_strlen(*toprint))
+	if (ft_strchr("diouxX", **str)
+	&& vars->nbp > 0 && vars->nbp > (int)ft_strlen(*toprint))
 	{
 		todel = *toprint;
 		todel2 = ft_strchar(vars->nbp - ft_strlen(todel), '0');
@@ -108,7 +113,7 @@ void modify_toprint(char **str, pf_spe *vars, char **toprint) //modifie selon la
 	if (0 < (vars->nbl - (int)ft_strlen(*toprint)))
 	{
 		todel = *toprint;
-		todel2 = ft_strchar( vars->nbl - ft_strlen(todel), ' ');
+		todel2 = ft_strchar(vars->nbl - ft_strlen(todel), ' ');
 		*toprint = ft_strjoin(todel2, todel);
 		ft_strdel(&todel);
 		ft_strdel(&todel2);
@@ -117,11 +122,15 @@ void modify_toprint(char **str, pf_spe *vars, char **toprint) //modifie selon la
 
 int spe_out(va_list args, t_list *m, char *str) //s'occupe du cas %...
 {
-	char *toprint;
+	char	*toprint;
+	char	*arg;
 	pf_spe *vars;
 
 	vars = ft_pf_spenew();
-	
+	if (ft_prstr2chr(str, "%cspdiouxXf") >= 0)
+		arg = ft_strsub(str, 0, ft_prstr2chr(str, "%cspdiouxXf"));
+	else
+		ft_putendl("Bad argument");
 	spe_input(vars, &str);
 	if (!(toprint = spe_search(args, m, str, vars)))
 	{
@@ -188,8 +197,8 @@ int main(int argc, char **argv)
 	str = "test : ";
 	str = ft_strjoin(str, argv[1]); //leaks
 	str = ft_strjoin(str, "\n");
-	i = ft_printf("test : %15.10i\n", 11316);
-	k = printf("test : %15.10i\n", 11316);
+	i = ft_printf("test : %f\n", (double)5);
+	k = printf("test : %f\n", (double)5);
 	//i = ft_printf(str, ft_atoi(argv[2]));
 	//k = printf(str, ft_atoi(argv[2]));
 	//k = printf("test : %15.5xlol\n", 15635);
